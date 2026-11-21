@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Privacy Policy for Project MUSE">
+    <title>Project MUSE Privacy Policy</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="brand-mark" aria-label="Project MUSE">
+          <span aria-hidden="true">✦</span>
+          <strong>PROJECT MUSE</strong>
+        </p>
+        <p class="policy-label">Privacy Policy</p>
+      </div>
+    </header>
+
+    <nav class="policy-nav" aria-label="Privacy Policy sections">
+      <a href="#information">Information</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#transmissions">External servers</a>
+      <a href="#storage">Storage</a>
+      <a href="#disconnect">Disconnect</a>
+      <a href="#security">Security</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <main id="main-content" class="policy-main">
+      <article class="policy-card" aria-labelledby="policy-title">
+        <header class="policy-header">
+          <p class="eyebrow">Project MUSE</p>
+          <h1 id="policy-title">Privacy Policy</h1>
+          <p class="effective-date">
+            <span>Effective date</span>
+            <time datetime="2026-11-21">21 November 2026</time>
+          </p>
+        </header>
+
+        <p>
+          This Privacy Policy explains how Project MUSE currently handles information.
+          Project MUSE is an Electron desktop application that runs the user interface
+          on the user's device and communicates with third-party services only when
+          the user chooses to use a connected feature.
+        </p>
+
+        <p>
+          This policy describes the application as it is currently implemented.
+          Pinterest account access and curated external art discovery are planned
+          features and are not currently implemented in Project MUSE.
+        </p>
+
+        <section id="information" aria-labelledby="information-title">
+          <h2 id="information-title">1. Information MUSE currently uses</h2>
+
+          <h3>Personal art library</h3>
+          <p>
+            When a user chooses <strong>Import images</strong> in Art Studio, MUSE
+            presents a local file picker and copies the selected image files into
+            the MUSE application data directory on the user's device. The original
+            files are not modified or deleted.
+          </p>
+          <p>MUSE also stores local metadata for each imported reference, including:</p>
+          <ul>
+            <li>A generated reference identifier</li>
+            <li>The imported file name</li>
+            <li>The original file name</li>
+            <li>The title</li>
+            <li>The creator name</li>
+            <li>The chosen category</li>
+            <li>Source description</li>
+            <li>Attribution text</li>
+            <li>Licence text and optional licence URL</li>
+            <li>The import date</li>
+          </ul>
+          <p>
+            The metadata is stored in <code>art-library/library.json</code> inside
+            the application's Electron user-data directory. Copied image files are
+            stored in the same <code>art-library</code> directory. Category
+            preferences and a limited history of recently shown reference
+            identifiers are also stored locally.
+          </p>
+          <p>
+            Users can organize, update, or remove individual references in the Art
+            Studio interface. Removing a reference deletes its copied image and its
+            metadata entry. The original source file remains untouched.
+          </p>
+          <p>
+            MUSE does not scan every file on the user's device. It only receives
+            the files that the user explicitly selects in the image picker.
+          </p>
+
+          <h3>Art category choices</h3>
+          <p>
+            MUSE stores the user's selected art categories locally so that random
+            personal inspiration can follow their preferences.
+          </p>
+
+          <h3>General settings</h3>
+          <p>MUSE stores general preference values selected by the user, including:</p>
+          <ul>
+            <li>A theme preference</li>
+            <li>Notification preference values</li>
+            <li>The selected Gemini model</li>
+            <li>The most recent cloud-sync test timestamp</li>
+          </ul>
+          <p>
+            These settings may be stored in the secure configuration file described
+            below.
+          </p>
+
+          <h3>Form data and temporary display data</h3>
+          <p>
+            When a user enters settings or art metadata, that information is
+            processed locally so it can be tested, saved, or displayed. Imported
+            preview images are read by the main process and provided to the renderer
+            for display.
+          </p>
+          <p>
+            MUSE does not currently contain a general account system or server that
+            creates a MUSE user profile.
+          </p>
+        </section>
+
+        <section id="integrations" aria-labelledby="integrations-title">
+          <h2 id="integrations-title">2. Credential and integration data</h2>
+
+          <h3>Secure configuration storage</h3>
+          <p>
+            MUSE can store the following values in
+            <code>muse_secure_config.enc</code> inside the Electron user-data
+            directory:
+          </p>
+          <ul>
+            <li>Gemini API key and selected model</li>
+            <li>Supabase project URL and public/anonymous key</li>
+            <li>Theme preference</li>
+            <li>Notification preferences</li>
+            <li>The last cloud-sync test timestamp</li>
+          </ul>
+          <p>
+            On supported systems, MUSE uses Electron <code>safeStorage</code>,
+            including operating-system-provided protection where available, to
+            encrypt this configuration file. The source code also contains a
+            fallback that writes configuration in plain JSON format when
+            operating-system encryption is unavailable. The application should
+            therefore not be described as guaranteeing encryption on every system.
+          </p>
+          <p>
+            This storage is local to the device and is not sent by MUSE to a MUSE
+            server. The configuration values may be sent to the corresponding
+            third-party service only when a user starts a connection test or another
+            integration action.
+          </p>
+          <p>
+            Users can clear stored Gemini and Supabase values using the Settings
+            interface. Users can also remove application data through their
+            operating system or application uninstall process.
+          </p>
+
+          <h3>Spotify</h3>
+          <p>Spotify access is optional. When the user chooses to connect:</p>
+          <ul>
+            <li>MUSE opens Spotify's authorization page in the user's browser.</li>
+            <li>MUSE receives an authorization code through a local callback.</li>
+            <li>MUSE exchanges the code for a Spotify access token and optional refresh token.</li>
+            <li>MUSE requests the user's display name and playback information needed for the Music Studio controls.</li>
+          </ul>
+          <p>
+            The Spotify integration currently requests profile, playback, library,
+            playlist, and recently played scopes. The application uses these scopes
+            to show account status, devices, current playback, and playback controls.
+          </p>
+          <p>
+            Spotify access and refresh tokens are kept in the application's running
+            memory. The source code does not currently persist these tokens in the
+            secure configuration file or another disk-based MUSE settings file.
+            They are cleared when the user chooses <strong>logout</strong> or when
+            the application process ends.
+          </p>
+          <p>
+            Spotify user data, including display name and playback data, is
+            processed locally for display and playback control. Spotify also
+            receives requests needed to authenticate the account and control playback.
+          </p>
+          <p>
+            The user can disconnect Spotify by using the existing logout behavior.
+            Revoking app access from the user's Spotify account settings may provide
+            an additional account-level disconnection option.
+          </p>
+
+          <h3>Google Gemini</h3>
+          <p>Google Gemini is optional and is configured in Settings.</p>
+          <p>
+            When the user chooses <strong>Test Connection</strong>, MUSE sends a
+            short test prompt to the configured Gemini model endpoint together with
+            the supplied API key. MUSE does not currently provide a completed Gemini
+            chat feature or send art-library content in its normal application flows.
+          </p>
+          <p>
+            Gemini configuration is stored locally in the secure configuration file.
+            The API key is only sent to Google Gemini for API requests initiated by
+            the user.
+          </p>
+
+          <h3>Supabase</h3>
+          <p>Supabase is optional and is configured in Settings.</p>
+          <p>
+            The current <strong>Test Connection</strong> and
+            <strong>Sync Now</strong> implementations send the configured project
+            URL and public/anonymous key to the configured Supabase host for a
+            PostgREST connection test. The source currently records a local
+            synchronization timestamp after a successful connection test.
+          </p>
+          <p>
+            The current implementation does <strong>not</strong> upload art-library
+            records, Spotify playback data, Gemini prompts, or general application
+            records to Supabase. The source does not currently implement the
+            Realtime WebSocket data synchronization described in the settings
+            interface. Supabase may receive connection-test requests and any future
+            application data only if synchronization is implemented in a later
+            version.
+          </p>
+          <p>
+            The Supabase public/anonymous key and project URL are stored locally
+            when saved by the user.
+          </p>
+
+          <h3>Pinterest</h3>
+          <p>
+            Pinterest account access is <strong>not currently implemented</strong>.
+            MUSE does not collect Pinterest account data, saved Pins, boards, OAuth
+            tokens, or Pinterest profile information.
+          </p>
+          <p>
+            The Art Studio interface currently displays a placeholder for Pinterest.
+            Any future implementation must clearly disclose the specific Pinterest
+            permissions requested, how authorized content is used, how tokens are
+            stored, and how users can disconnect Pinterest.
+          </p>
+
+          <h3>Wikimedia Commons and other curated sources</h3>
+          <p>
+            MUSE does not currently retrieve external art from Wikimedia Commons or
+            another curated image source. The Discover section is also a placeholder.
+          </p>
+          <p>
+            Before such retrieval is implemented, MUSE should disclose the source,
+            attribution requirements, licence information, and whether the app
+            downloads or only links to the external reference.
+          </p>
+        </section>
+
+        <section id="transmissions" aria-labelledby="transmissions-title">
+          <h2 id="transmissions-title">3. Information sent to external servers</h2>
+          <p>
+            The following external communications occur only in the implemented
+            features described above:
+          </p>
+          <ul>
+            <li><strong>Spotify:</strong> account authorization, token exchange, profile information, playback state, device information, and playback commands.</li>
+            <li><strong>Google Gemini:</strong> a short test prompt and API request details when the user tests the Gemini connection.</li>
+            <li><strong>Supabase:</strong> a connection-test request to the user-configured Supabase URL and public/anonymous key.</li>
+            <li><strong>Google Fonts:</strong> the renderer stylesheet requests a web font from Google Fonts. This may send ordinary network information such as the user's IP address and browser/request metadata to Google.</li>
+          </ul>
+          <p>
+            Project MUSE does not currently send the personal art library to an
+            external MUSE server.
+          </p>
+          <p>
+            Pinterest and Wikimedia Commons do not receive data from MUSE for the
+            features described in this policy until those integrations are
+            implemented.
+          </p>
+        </section>
+
+        <section id="storage" aria-labelledby="storage-title">
+          <h2 id="storage-title">4. Local storage and retention</h2>
+          <p>
+            MUSE stores local information in the application's Electron user-data
+            directory. The exact operating-system location varies by platform.
+          </p>
+          <p>Current local items may include:</p>
+          <ul>
+            <li>Copied personal art images</li>
+            <li>Art metadata and category preferences</li>
+            <li>Recent inspiration identifiers</li>
+            <li>Saved settings</li>
+            <li>Gemini configuration</li>
+            <li>Supabase configuration</li>
+            <li>Spotify connection state only while the application is running</li>
+          </ul>
+          <p>
+            Art and settings remain on the device until the user removes individual
+            art references, clears the relevant settings, removes application data,
+            or uninstalls the application. MUSE does not currently provide a single
+            “delete all application data” control or a complete account-deletion
+            workflow.
+          </p>
+          <p>
+            Spotify tokens are memory-only and end when the user logs out or closes
+            the application. Because MUSE is a local desktop application, external
+            services' own retention periods apply to their server-side copies and
+            logs.
+          </p>
+        </section>
+
+        <section id="disconnect" aria-labelledby="disconnect-title">
+          <h2 id="disconnect-title">5. How to disconnect integrations and remove local content</h2>
+
+          <h3>Personal art library</h3>
+          <p>
+            Users can remove each copied reference from My Collection through the
+            <strong>Remove</strong> action. Removing a reference deletes the copied
+            image and associated local metadata entry. It does not affect the
+            original image selected during import.
+          </p>
+          <p>
+            MUSE does not currently provide a one-click control to delete every
+            imported image and metadata record at once.
+          </p>
+
+          <h3>Spotify</h3>
+          <p>
+            Users can use MUSE's Spotify logout control to clear the in-memory
+            Spotify tokens and display name.
+          </p>
+
+          <h3>Gemini</h3>
+          <p>
+            Users can use the Settings clear-key control to remove the locally
+            stored Gemini API key and saved model-related data.
+          </p>
+
+          <h3>Supabase</h3>
+          <p>
+            Users can use the Settings clear control to remove the locally stored
+            Supabase URL and public/anonymous key.
+          </p>
+
+          <h3>Application data</h3>
+          <p>
+            Users can remove all remaining MUSE application data from the operating
+            system's application-data directory or through an operating-system-
+            supported uninstall process, where available.
+          </p>
+        </section>
+
+        <section id="security" aria-labelledby="security-title">
+          <h2 id="security-title">6. Security</h2>
+          <p>
+            Project MUSE uses a limited preload-to-main-process bridge to keep some
+            operating-system and network operations outside the renderer process.
+            The application opens a local callback server for Spotify authorization
+            and uses state validation and PKCE for the implemented Spotify flow.
+          </p>
+          <p>
+            Where supported, Electron <code>safeStorage</code> is used for the
+            secure configuration file. This protection depends on the operating
+            system and available encryption support. The source also has a plain-
+            text fallback for configuration if hardware-level encryption is
+            unavailable.
+          </p>
+          <p>
+            Art-library image files and <code>library.json</code> metadata are not
+            currently encrypted by a MUSE-specific encryption mechanism. They are
+            stored in the ordinary Electron user-data directory.
+          </p>
+          <p>
+            No application can guarantee absolute security. Users should protect
+            their device account and operating-system data with appropriate access
+            controls.
+          </p>
+
+          <h2>7. Children's privacy</h2>
+          <p>
+            Project MUSE is not directed at children and does not have a MUSE account
+            registration process. Third-party integrations may have their own age
+            requirements.
+          </p>
+
+          <h2>8. Changes to this policy</h2>
+          <p>
+            MUSE may add integrations or data features in later releases. When that
+            happens, this policy should be updated before the feature is made
+            available. Users should review the policy and integration disclosures
+            before connecting a new service.
+          </p>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <h2 id="contact-title">9. Contact</h2>
+          <p>For privacy questions or requests:</p>
+          <p class="contact-status">
+            <strong>Project MUSE support:</strong>
+            No support email is currently published.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>Project MUSE Privacy Policy</p>
+    </footer>
+  </body>
+</html>
